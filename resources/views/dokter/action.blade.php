@@ -94,7 +94,7 @@
                     <section>
                         <form class="forms-sample">
                             <div class="row mb-3">
-                                <label for="diagnosa" class="col-sm-1 col-form-label">Diagnosa</label>
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Diagnosa</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="exampleInputD"
                                         placeholder="isi diagnosa...">
@@ -103,7 +103,7 @@
                         </form>
                         <form class="forms-sample">
                             <div class="row mb-3">
-                                <label for="rekomendasi" class="col-sm-1 col-form-label">Rekomendasi</label>
+                                <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="exampleInputD"
                                         placeholder="isi rekomendasi...">
