@@ -1,3 +1,9 @@
+<style>
+    .nav-item{
+        margin-bottom: 5px;
+        
+    }
+</style>
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="#" class="sidebar-brand">
@@ -11,21 +17,21 @@
     </div>
     <div class="sidebar-body">
         <ul class="nav">
+            @if (Auth::user()->role=='admin')
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-                <a href="dashboard.html" class="nav-link">
+                <a href="/admin/dashboard" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
-            @if (Auth::user()->role=='admin')
             <li class="nav-item">
                 <a href="" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Manajemen User</span>
                 </a>
             </li>
-            
+
             <li class="nav-item">
                 <a href="{{route('dokter.index')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
@@ -39,7 +45,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('orangtua.index')}}" class="nav-link">
+                <a href="{{route('anak.index')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Manajemen Anak</span>
                 </a>
@@ -62,21 +68,15 @@
                     <span class="link-title">Manajemen Sekolah</span>
                 </a>
             </li>
-            <li class="nav-item nav-category">Fitur</li>
-            <li class="nav-item">
-                <a href="/ukgs" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">UKGS</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="ukgm.html" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">UKGM</span>
-                </a>
-            </li>
 
             @elseif (Auth::user()->role=='orangtua')
+            <li class="nav-item nav-category">Main</li>
+            <li class="nav-item">
+                <a href="/orangtua/dashboard" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Dashboard</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('viewanak')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
@@ -86,14 +86,91 @@
             <li class="nav-item">
                 <a href="{{route('pemeriksaanfisik.create')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">Pemeriksaan</span>
+                    <span class="link-title">Pemeriksaan Fisik</span>
                 </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('pemeriksaangigi.create')}}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title"> Periksa gigi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('view-riwayat')}}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title"> Riwayat</span>
+                </a>
+            </li>
+
+            @elseif (Auth::user()->role=='dokter')
+            <li class="nav-item nav-category">Main</li>
+            <li class="nav-item">
+                <a href="/dokter/dashboard" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item nav-category">Fitur</li>
+            <li class="nav-item">
+                <a href="/dokter/profil" class="nav-link">
+                    <i class="link-icon" data-feather="user"></i>
+                    <span class="link-title">Profil</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#PemeriksaanGigi" role="button" aria-expanded="false"
+                    aria-controls="PemeriksaanGigi">
+                    <i class="link-icon" data-feather="anchor"></i>
+                    <span class="link-title">Pemeriksaan Gigi</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="PemeriksaanGigi">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{route('dokter.periksaUKGS')}}" class="nav-link">UKGS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('dokter.periksaUKGM')}}" class="nav-link">UKGM</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#RekapData" role="button" aria-expanded="false"
+                    aria-controls="RekapData">
+                    <i class="link-icon" data-feather="book-open"></i>
+                    <span class="link-title">Rekap Data Pasien</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="RekapData">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{route('dokter.rekapDataUKGS')}}" class="nav-link">UKGS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('dokter.rekapDataUKGM')}}" class="nav-link">UKGM</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item nav-category">lainnya</li>
+            <li class="nav-item">
+                <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); 
+                    document.getElementById('logout-form').submit();">
+                    <i class="link-icon" data-feather="log-out"></i>
+                    <span class="link-title">Keluar</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
             @endif
 
             
-            
-           
+
+
+
         </ul>
     </div>
 </nav>

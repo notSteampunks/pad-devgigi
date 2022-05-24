@@ -9,10 +9,10 @@
                 <h6 class="card-title">Tambah Orangtua</h6>
                 <form action="{{ route('orangtua.store') }}" class="forms-sample" id="orangtua-store" method="post" nctype="multipart/form-data" files=true >
                     @csrf
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" autocomplete="off"

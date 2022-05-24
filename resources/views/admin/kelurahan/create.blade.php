@@ -10,7 +10,8 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label class="form-label">Kecamatan</label>
-                <select class="form-select" name="kecamatan" id="" >
+                <select class="form-select" name="id_kecamatan" id="" >
+                    <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
                     @foreach(\App\Models\Kecamatan::get() as $value => $key)
                     <option class="mb-2" value="{{$key->id}}">{{$key->nama}}</option>
                 @endforeach

@@ -13,8 +13,8 @@ class Sekolah extends Model
     protected $table = 'sekolah';
     protected $guarded = ['created_at', 'updated_at'];
     protected $fillable=[
-        'id_kecamatan',
         'id_kelurahan',
+        'type',
         'nama',
         'alamat',
     ];

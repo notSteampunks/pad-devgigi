@@ -62,7 +62,7 @@ class KelurahanController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }else{
             $data= Kelurahan::create([
-                'id_kecamatan'=> request('kecamatan'),
+                'id_kecamatan'=> request('id_kecamatan'),
                 'nama'=> request('nama'),
 
             ]);
@@ -129,9 +129,16 @@ class KelurahanController extends Controller
         //
     }
 
-    public function listDesa($id_kecamatan)
-    {
-        $kelurahan = Kelurahan::WHERE('id_kecamatan', $id_kecamatan)->get();
+    public function getDesa(Request $request){
+        $desa = Kelurahan::where("id_kecamatan",$request->id_kecamatan)->pluck('nama');
         return response()->json($desa);
     }
+
+    public function listDesa($id_kecamatan)
+    {
+        $desa = Kelurahan::WHERE('id_kecamatan', $id_kecamatan)->get();
+        return response()->json($desa);
+    }
+
+
 }

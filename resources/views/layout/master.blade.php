@@ -33,8 +33,13 @@ License: For each use you must have a valid license purchased only from above li
     <!-- endinject -->
     <link rel="stylesheet" href="{{asset('assets/swal/sweetalert.css')}}">
     <script src="{{asset('assets/swal/sweetalert.js')}}"></script>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
+	<link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     
-     <!-- select 2 -->
+    <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
+    
+    <!-- select 2 -->
     <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
 
@@ -42,20 +47,21 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/jquery-steps/jquery.steps.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <!-- endinject -->
-
+    <link rel="stylesheet" href="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
 
-    
+
 
 </head>
 
@@ -73,7 +79,6 @@ License: For each use you must have a valid license purchased only from above li
             <!-- partial -->
 
             <div class="page-content">
-
                 @yield('content')
             </div>
 
@@ -85,9 +90,9 @@ License: For each use you must have a valid license purchased only from above li
     </div>
 
     <!-- core:js -->
-    
+
     <script src="{{asset('assets/vendors/core/core.js')}}"></script>
-   
+
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
@@ -100,10 +105,11 @@ License: For each use you must have a valid license purchased only from above li
 
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-    <script src="{{asset('assets/vendors/jquery-steps/jquery.steps.min.js')}}"></script>  
+    <script src="{{asset('assets/vendors/jquery-steps/jquery.steps.min.js')}}"></script>
     <script src="{{asset('assets/vendors/select2/select2.min.js')}}"></script>
     <script src="{{asset('assets/js/select2.js')}}"></script>
-    
+	<script src="{{asset('assets/vendors/prismjs/prism.js')}}"></script>
+	<script src="{{asset('assets/vendors/clipboard/clipboard.min.js')}}"></script>
 
     <!-- inject:js -->
     <script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
@@ -115,11 +121,18 @@ License: For each use you must have a valid license purchased only from above li
 
     <script src="{{asset('assets/js/dashboard-light.js')}}"></script>
     <script src="{{asset('assets/js/datepicker.js')}}"></script>
+    <!-- Grafik -->
+    <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.categories.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.flot-light.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 
     <script>
-        $(document).ready( function () {
-        $('#dataTableExample').DataTable();
-    } );
+        $(document).ready(function () {
+            $('#dataTableExample').DataTable();
+        });
+
     </script>
 
     <script>
@@ -127,8 +140,24 @@ License: For each use you must have a valid license purchased only from above li
             headerTag: "h2",
             bodyTag: "section",
             transitionEffect: "slideLeft",
-            autoFocus: true
+            autoFocus: true,
+            labels: {
+                finish: "Submit",
+                next: "Lanjut",
+                previous: "Kembali"
+            },
+            onStepChanged:function(event, currentIndex, newIndex){
+                console.log("Step changed to: " + currentIndex);
+
+                if(currentIndex == 0){
+                    document.getElementById("keterangan").style.display = "";
+                }else{
+                    document.getElementById("keterangan").style.display = "none";
+                }
+                return true;
+            },
         });
+
     </script>
 
 

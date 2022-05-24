@@ -91,11 +91,11 @@ class AnakController extends Controller
             $anak = new Anak();
             $anak->id_orangtua=$request->orangtua;
             $anak->nama = $request->nama;
+            $anak->jenis_kelamin = $request->jenis_kelamin;
+            $anak->tempat_lahir = $request->tempat_lahir;
             $anak->tanggal_lahir = $request->tanggal_lahir;
-            $anak->sekolah = $request->sekolah;
+            $anak->id_sekolah = $request->sekolah;
             $anak->kelas = $request->kelas;
-            $anak->bb = $request->bb;
-            $anak->tb = $request->tb;
 
             $anak->save();
             

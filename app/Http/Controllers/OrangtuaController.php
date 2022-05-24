@@ -151,6 +151,10 @@ class OrangtuaController extends Controller
             $orangtua = new Orangtua();
             $orangtua->id_users=$user->id;
             $orangtua->nama = $request->nama;
+            $orangtua->id_kecamatan = $request->id_kecamatan;
+            $orangtua->id_kelurahan = $request->id_kelurahan;
+            $orangtua->tempat_lahir = $request->tempat_lahir;
+            $orangtua->tanggal_lahir = $request->tanggal_lahir;
             $orangtua->alamat = $request->alamat;
             $orangtua->pendidikan= $request->pendidikan;
             if($orangtua){
@@ -202,6 +206,8 @@ class OrangtuaController extends Controller
         $anak = new Anak();
         $anak->id_orangtua= $orangtua;
         $anak->nama = $request->nama;
+        $anak->jenis_kelamin = $request->jenis_kelamin;
+        $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
         $anak->id_sekolah = $request->sekolah;
         $anak->kelas = $request->kelas;

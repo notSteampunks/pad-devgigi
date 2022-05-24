@@ -10,7 +10,8 @@
         <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label">Kecamatan</label>
-                    <select class="form-select" name="kecamatan" onChange="updateKelurahan()" id="kecamatan" data-width="100%">
+                    <select class="form-select" name="kecamatan"  id="id_kecamatan" data-width="100%">
+                        <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
                         @foreach(\App\Models\Kecamatan::get() as $value => $key)
                   
                         <option value="{{$key->id}}">{{$key->nama}}</option>
@@ -19,16 +20,22 @@
                 </div>
             <div class="mb-3">
                 <label class="form-label">Kelurahan</label>
-                <select class="form-select" name="kelurahan" data-width="100%">
-                    @foreach(\App\Models\Kelurahan::get() as $value => $key)
-              
-                    <option value="{{$key->id}}">{{$key->nama}}</option>
-                @endforeach
+                <select class="form-select" name="kelurahan" data-width="100%" id="id_desa">
+
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tipe</label>
+                <select class="form-select" name="type"  data-width="100%">
+                    <option class="mb-2" value=" ">---Pilih Tipe---</option>
+                    <option class="mb-2" value="sekolah">Sekolah</option>
+                    <option class="mb-2" value="posyandu">Posyandu</option>
+
                 </select>
             </div>
             <div class="mb-3">
                 <div class="form-group">
-                    <label>Sekolah</label>
+                    <label>Nama</label>
                     <input type="text"  name="nama" class="form-control"
                         placeholder="">
                 </div>
@@ -87,6 +94,29 @@
 
             });
         });
+
+        $('#id_kecamatan').change(function(){
+        let kecamatan = $("#id_kecamatan").val()
+        $("#id_desa").children().remove();
+        $("#id_desa").val('');
+        $("#id_desa").append('<option value="">---Pilih Kelurahan---</option>');
+        $("#id_desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#id_desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.nama}</option>`
+                    })
+                    $("#id_desa").append(tampilan_option);
+                },
+            });
+        }
+    });
+
+
 
     });
 

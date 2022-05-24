@@ -10,6 +10,7 @@ use App\Models\Orangtua;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -66,6 +67,8 @@ class RegisterController extends Controller
      */
     public function storeOrangtua(Request $request)
     {
+        DB::beginTransaction();
+        try{
         $user = New User();
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -83,8 +86,13 @@ class RegisterController extends Controller
                 $orangtua->save();
                 
             }
+        DB::commit();
             return redirect('/');
         }
+    }catch(\Exception $e){
+        DB::rollback();
+        return redirect('/');
+    }
     }
     protected function create(array $data)
     {
@@ -99,7 +107,7 @@ class RegisterController extends Controller
         Orangtua::create([
             'id_user' =>$data['id_user'],
             'nama' => $data['nama'],
-            'alamat' => $data['alamat'],
+            'alamat' => $data['id_kecamatan'],
             'pendidikan' => $data['pendidikan']
         ]);
     }

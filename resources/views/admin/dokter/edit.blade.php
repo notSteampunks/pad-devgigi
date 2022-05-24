@@ -53,7 +53,7 @@
                             placeholder="Tempat Lahir">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">tanggal Lahir</label>
+                        <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control" id="tanggal" name="tanggal_lahir" autocomplete="off" value="{{$dokter->tanggal_lahir}}"
                             placeholder="Tempat Lahir">
                     </div>

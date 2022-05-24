@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Kecamatan;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
+use Auth;
 
 
 
@@ -173,7 +175,93 @@ class DokterController extends Controller
 
 
     }
+    public function viewDashboard()
+    {
+        return view('dokter.dashboard');
+    }
 
+    public function profil()
+    {
+        return view('dokter.profil');
+    }
+    public function profil_edit($id)
+    {   
+        $logdokter = Auth::user()->dokter;
+        $dokter = $logdokter->find($id);
+        return view('dokter.profil-edit',compact('dokter'));
+    }
+    public function profil_update(Request $request, $id)
+    {
+ 
+        $logdokter = Auth::user()->dokter;
+        $dokter = $logdokter->find($id);
+        $dokter->nik = $request->nik;
+        $dokter->nama =$request->nama;
+        $dokter->jenis_kelamin = $request->jenis_kelamin;
+        $dokter->tempat_lahir=  $request->tempat_lahir;
+        $dokter->tanggal_lahir= $request->tanggal_lahir;
+        $dokter->no_telp = $request->no_telp;
+        $dokter->no_str= $request->no_str;
+        if($request->hasfile('avatar'))
+        {
+            $destination = 'dokter/avatar/'.$dokter->avatar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('avatar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('dokter/avatar/', $filename);
+            $dokter->avatar = $filename;
+        }
+        if($request->hasfile('header'))
+        {
+            $destination = 'dokter/header/'.$dokter->header;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('header');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('dokter/header/', $filename);
+            $dokter->header = $filename;
+        }
+
+
+        $dokter->save();
+        return redirect()->route('dokter.profil');
+
+    }
+    public function pemeriksaan_ukgs(){
+        return view('dokter.pemeriksaanData.ukgs');
+    }
+
+    public function pemeriksaan_ukgm(){
+        return view('dokter.pemeriksaanData.ukgm');
+    }
+    public function pemeriksaan_data_ukgs(){
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS');
+    }
+
+    public function pemeriksaan_data_ukgm(){
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM');
+    }
+    public function rekap_ukgs(){
+        return view('dokter.rekapData.ukgs');
+    }
+
+    public function rekap_ukgm(){
+        return view('dokter.rekapData.ukgm');
+    }
+    public function rekap_detail_ukgs(){
+        return view ('dokter.rekapData.rekapDataUKGS');
+    }
+
+    public function rekap_detail_ukgm(){
+        return view ('dokter.rekapData.rekapDataUKGM');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -182,6 +270,7 @@ class DokterController extends Controller
      */
     public function destroy($id)
     {
+        
         $dokter = Dokter::find($id);
         $dokter ->delete();
         return response()->json(['data'=>'success delete data']);

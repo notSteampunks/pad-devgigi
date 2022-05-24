@@ -38,6 +38,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function redirectTo()
+    {
+        return RouteServiceProvider::HOME;
+    }
+
+    
     public function login(\Illuminate\Http\Request $request){
         //echo($user);
         

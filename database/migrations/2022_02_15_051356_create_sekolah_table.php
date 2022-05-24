@@ -15,13 +15,13 @@ class CreateSekolahTable extends Migration
     {
         Schema::create('sekolah', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_kecamatan')->nullable();
             $table->unsignedBigInteger('id_kelurahan')->nullable();
-            $table->string('nama');
-            $table->string('alamat');
+            $table->string('type')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_kecamatan')->references('id')->on('kecamatan')->onDelete('cascade');
+            
             $table->foreign('id_kelurahan')->references('id')->on('kelurahan')->onDelete('cascade');
         });
     }

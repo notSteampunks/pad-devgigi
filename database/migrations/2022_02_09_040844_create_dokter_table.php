@@ -21,7 +21,7 @@ class CreateDokterTable extends Migration
             $table->string('nama');
             $table->string('jenis_kelamin')->nullable();
             $table->string('tempat_lahir')->nullable();
-            $table->datetime('tanggal_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('no_telp');
             $table->string('no_str');
             $table->timestamps();

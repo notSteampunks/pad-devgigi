@@ -18,7 +18,7 @@ class CreatePemeriksaanFisikTable extends Migration
             $table->unsignedBigInteger('id_anak')->nullable();
             $table->integer('tinggi_badan')->nullable();
             $table->integer('berat_badan')->nullable();
-            $table->double('imt')->nullable();
+            $table->float('imt',10,1)->nullable();
             $table->integer('sistole')->nullable();
             $table->integer('diastole')->nullable();
             $table->softDeletes();

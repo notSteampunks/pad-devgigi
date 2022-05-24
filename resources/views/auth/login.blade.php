@@ -49,8 +49,8 @@
 						<div class="card">
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
-                  <div class="auth-side-wrapper">
-
+                  <div class="">
+                    <img class="img-fluid" src="{{asset('assets/images/login-bg.png')}}" alt="">
                   </div>
                 </div>
                 <div class="col-md-8 ps-md-0">
@@ -60,12 +60,18 @@
                     <form class="forms-sample" action="{{route('login')}}" method="POST"> 
                         @csrf
                       <div class="mb-3">
-                        <label for="userEmail" class="form-label">Username</label>
+                        <label for="userEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="userEmail" placeholder="username">
                       </div>
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
                         <input type="password" class="form-control" name="password" id="userPassword" autocomplete="current-password" placeholder="Password">
+                      </div>
+                      <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">
+                          Show Password
+                        </label>
                       </div>
                       <br>
                       <div>
@@ -73,6 +79,8 @@
                           Login
                         </button>
                       </div>
+                      <a href="/register" class="d-block mt-3 text-muted">Belum punya akun? 
+                        Daftar</a>
                     </form>
                   </div>
                 </div>
@@ -99,6 +107,17 @@
 
 	<!-- Custom js for this page -->
 	<!-- End custom js for this page -->
+  <script type="text/javascript"> 
+  	$(document).ready(function(){		
+		$('#exampleCheck1').click(function(){
+			if($(this).is(':checked')){
+				$('#userPassword').attr('type','text');
+			}else{
+				$('#userPassword').attr('type','password');
+			}
+		});
+	});
+  </script>
 
 </body>
 </html>

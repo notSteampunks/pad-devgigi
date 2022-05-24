@@ -24,8 +24,8 @@ class SekolahController extends Controller
 
            return $btn;
        })
-       ->addColumn('kecamatan',function($row){
-        return $row->kecamatan->nama;
+    ->addColumn('kecamatan',function($row){
+        return $row->kelurahan->kecamatan->nama;
     })
     ->addColumn('kelurahan',function($row){
         return $row->kelurahan->nama;
@@ -65,8 +65,9 @@ class SekolahController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }else{
             $data= Sekolah::create([
-                'id_kecamatan'=> request('kecamatan'),
+                
                 'id_kelurahan'=> request('kelurahan'),
+                'type'=> request('type'),
                 'nama'=> request('nama'),
                 'alamat' => request('alamat')
 
@@ -115,8 +116,8 @@ class SekolahController extends Controller
           return response()->json(['errors' => $validator->errors()->all()]);
         } else {
           $data = Sekolah::find($id);
-          $data->id_kecamatan   = $request->kecamatan_edit;
           $data->id_kelurahan   = $request->kelurahan_edit;
+            $data->type   = $request->type_edit;
           $data->nama = $request->nama_edit;
           $data->alamat = $request->alamat_edit;
           $data->save();
@@ -135,5 +136,17 @@ class SekolahController extends Controller
     {
         $data = Sekolah::find($id);
         $data->delete();
+    }
+
+    public function listSekolah($id_kelurahan)
+    {
+        $sekolah = Sekolah::where('type','sekolah')->where('id_kelurahan', $id_kelurahan)->get();
+        return response()->json($sekolah);
+    }
+
+    public function listPosyandu($id_kelurahan)
+    {
+        $posyandu = Sekolah::where('type','posyandu')->where('id_kelurahan', $id_kelurahan)->get();
+        return response()->json($posyandu);
     }
 }

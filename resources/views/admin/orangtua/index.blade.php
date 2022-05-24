@@ -16,7 +16,7 @@
         </div>
         <hr />
 			<div class="table-responsive">
-            <table id="table-orangtua" class="table " >
+            <table id="table-orangtua" class="table " style="width:100%" >
                 <thead>
                     <tr>
 						<th>id</th>
